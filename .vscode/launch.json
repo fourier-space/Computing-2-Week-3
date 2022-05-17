@@ -16,7 +16,7 @@
         },
         {
             "name": "Generate Docs",
-            "command": "jsdoc -c jsdoc.json & exit",
+            "command": "jsdoc -c jsdoc.json",
             "request": "launch",
             "type": "node-terminal"
         },
@@ -35,7 +35,7 @@
             "request": "launch",
             "reAttach": true,
             "reloadOnAttach": true,
-            "url": "http://localhost:8080/index.html",
+            "url": "http://localhost:8080/docs/",
             "pathMappings": [
                 {
                     "url": "http://localhost:8080/common",
