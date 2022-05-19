@@ -57,6 +57,17 @@ Connect4.token_strings = Object.freeze({
 Connect4.empty_board = function (width = 7, height = 6) {
 };
 
+const is_free = function (column) {
+    return column.includes(0);
+};
+
+const label_free_column = function (column, index) {
+    if (is_free(column)) {
+        return index;
+    }
+    return -1;
+};
+
 /**
  * Returns an array of which column numbers are free to place a token in.
  * @memberof Connect4
@@ -65,6 +76,7 @@ Connect4.empty_board = function (width = 7, height = 6) {
  * @returns {number[]} An array of column indices of free columns.
  */
 Connect4.free_columns = function (board) {
+    return board.map(label_free_column).filter((x) => x !== -1);
 };
 
 /**
@@ -83,14 +95,15 @@ Connect4.is_ended = function (board) {
     );
 };
 
-const is_win_in_column = function (player) {
-    return function (board) {
-
-    };
+const is_column_winning_for_player = function (player) {
+    return R.pipe(
+        R.aperture(4),
+        R.any(R.equals(R.repeat(player, 4)))
+    );
 };
 
 const is_vertical_win_for_player = function (player, board) {
-    return R.any(is_win_in_column(player), board);
+    return R.any(is_column_winning_for_player(player), board);
 };
 
 const is_horizontal_win_for_player = function (player, board) {
