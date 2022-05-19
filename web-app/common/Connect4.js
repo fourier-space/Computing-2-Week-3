@@ -76,6 +76,33 @@ Connect4.free_columns = function (board) {
  * @returns {boolean} Whether the game has ended.
  */
 Connect4.is_ended = function (board) {
+    return (
+        Connect4.is_winning_for_player(1, board) ||
+        Connect4.is_winning_for_player(2, board) ||
+        Connect4.free_columns(board).length === 0
+    );
+};
+
+const is_win_in_column = function (player) {
+    return function (board) {
+
+    };
+};
+
+const is_vertical_win_for_player = function (player, board) {
+    return R.any(is_win_in_column(player), board);
+};
+
+const is_horizontal_win_for_player = function (player, board) {
+    return is_vertical_win_for_player(player, R.transpose(board));
+};
+
+const is_positive_diagonal_win_for_player = function (player, board) {
+
+};
+
+const is_negative_diagonal_win_for_player = function (player, board) {
+
 };
 
 /**
@@ -90,6 +117,12 @@ Connect4.is_ended = function (board) {
  * for the specified player.
  */
 Connect4.is_winning_for_player = function (player, board) {
+    return (
+        is_vertical_win_for_player(player, board) ||
+        is_horizontal_win_for_player(player, board) ||
+        is_positive_diagonal_win_for_player(player, board) ||
+        is_negative_diagonal_win_for_player(player, board)
+    );
 };
 
 /**
