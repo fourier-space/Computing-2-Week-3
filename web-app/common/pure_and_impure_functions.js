@@ -18,7 +18,7 @@ const increment = function (x) {
     return x + 1;
 };
 
-const security_report = {
+const security_report_example = {
     "days_since_last_accident": 0
 };
 
@@ -47,7 +47,7 @@ const add = function (x, y) {
 
 const add_pure = function (x, y) {
     return x + y;
-}; // Side effect.
+};
 
 debugger;
 
