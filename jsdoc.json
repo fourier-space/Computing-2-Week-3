@@ -4,7 +4,7 @@
     },
     "source": {
         "include": [
-            "web-app/common/Game_module.js"
+            "web-app/Connect4.js"
         ],
         "includePattern": "\\.js$",
         "excludePattern": "(node_modules/|docs)"

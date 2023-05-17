@@ -5,50 +5,36 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Module",
-            "type": "pwa-node",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            // You'll need to change this line below to point to your module.
-            "program": "${workspaceFolder}/web-app/common/Game_module.js"
-        },
-        {
-            "name": "Generate Docs",
-            "command": "jsdoc -c jsdoc.json",
-            "request": "launch",
-            "type": "node-terminal"
-        },
-        {
-            "name": "Server ­– Node",
-            "type": "pwa-node",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/web-app/server/server.js"
-        },
-        {
-            "name": "Browser – Firefox",
+            "name": "Run Web App – Firefox",
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
             "reloadOnAttach": true,
-            "url": "http://localhost:8080/docs/",
-            "pathMappings": [
-                {
-                    "url": "http://localhost:8080/common",
-                    "path": "${workspaceFolder}/web-app/common"
-                },
-                {
-                    "url": "http://localhost:8080/",
-                    "path": "${workspaceFolder}/web-app/browser"
-                }
-            ],
+            "file": "${workspaceFolder}/web-app/index.html",
             "preferences": {
                 "security.fileuri.strict_origin_policy": false
-            }
+            },
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**",
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "name": "Debug Module",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**",
+                "<node_internals>/**"
+            ],
+            // You'll need to change this line below to point to your module.
+            "program": "${workspaceFolder}/web-app/Game_module.js"
+        },
+        {
+            "name": "Generate Docs",
+            "command": "jsdoc -c jsdoc.json; exit",
+            "request": "launch",
+            "type": "node-terminal"
         }
     ]
 }
