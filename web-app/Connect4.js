@@ -1,5 +1,5 @@
 /**
- * THis is a module for playing connect 4
+ * This is a module for playing connect 4
  * @namespace Connect4
  */
 const Connect4 = {};

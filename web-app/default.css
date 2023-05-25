@@ -1,0 +1,21 @@
+body
+{
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: aquamarine;
+}
+
+#escape_list
+{
+    font-family: "Fira Sans";
+}
+
+h1
+{
+    text-align: center;
+    font-family: Impact;
+}
+
+.highlight
+{
+    background-color: yellowgreen;
+}
