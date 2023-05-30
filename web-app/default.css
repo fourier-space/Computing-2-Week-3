@@ -68,6 +68,16 @@ main
 
 #game_board td
 {
-    background-color: #0f8;
+    /* background-color: #0f8; */
     border: 1px solid black;
+}
+
+.lit
+{
+    background: yellow;
+}
+
+.unlit
+{
+    background: midnightblue;
 }
