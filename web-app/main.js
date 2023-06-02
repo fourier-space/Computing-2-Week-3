@@ -4,11 +4,15 @@ import LightsOut from "./LightsOut.js";
 const game_rows = 5;
 const game_columns = 5;
 
-let game_state = LightsOut.empty_board(game_rows, game_columns);
+let game_state = LightsOut.starting_state();
 
-const update_board = function () {
+const update_display = function () {
 
-    game_state.forEach(function (row, row_index) {
+    document.getElementById("moves").textContent = game_state.moves;
+    document.getElementById("level").textContent = game_state.level;
+    document.getElementById("par").textContent = game_state.par;
+
+    game_state.board.forEach(function (row, row_index) {
         row.forEach(function (cell, column_index) {
             const table_cell = table_cells[row_index][column_index];
             table_cell.className = (
@@ -33,12 +37,12 @@ const table_cells = R.range(0, game_rows).map(function (row_index) {
 
     return R.range(0, game_columns).map(function (column_index) {
         const td = document.createElement("td");
-        td.textContent = `${column_index},${row_index}`;
+        // td.textContent = `${column_index},${row_index}`;
 
         td.onclick = function () {
-            console.log(`${column_index},${row_index}`);
+            // console.log(`${column_index},${row_index}`);
             game_state = LightsOut.ply(column_index, row_index, game_state);
-            update_board();
+            update_display();
         };
 
         tr.append(td);
@@ -48,4 +52,4 @@ const table_cells = R.range(0, game_rows).map(function (row_index) {
 
 });
 
-update_board();
+update_display();
