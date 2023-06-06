@@ -17,6 +17,9 @@
 
     --aside-background: #99a;
     --main-background: #bbc;
+    --focus-inner-background: rgb(176, 255, 17);
+    --focus-outer-background: rgb(170, 132, 102);
+    --focus-drop-shadow: rgb(144, 170, 51);
     --lit-inner-background: #f17;
     --lit-outer-background: #a67;
     --lit-background: #d47;
@@ -102,6 +105,16 @@ main
     position: relative;
     top: var(--button-press-depth);
     --button-lower-edge: var(--button-lower-edge-pressed);
+}
+
+#game_board td:focus
+{
+    --lit-inner-background: var(--focus-inner-background);
+    --lit-outer-background: var(--focus-outer-background);
+    --lit-drop-shadow: var(--focus-drop-shadow);
+    --unlit-outer-background: var(--focus-drop-shadow);
+    --unlit-drop-shadow: var(--focus-drop-shadow);
+    outline: none;
 }
 
 .lit

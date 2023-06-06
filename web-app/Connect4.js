@@ -76,7 +76,7 @@ Connect4.free_columns = R.pipe(
  * @param {Connect4.Board} board The board to test.
  * @returns {boolean} Whether the game has ended.
  */
-Connect4.is_ended = function (board) {
+Connect4.is_game_ended = function (board) {
 };
 
 /**
@@ -105,6 +105,14 @@ Connect4.player_to_ply = function (board) {
 
 };
 
+const column_is_full = function (column_index, board) {
+
+};
+
+const place_token_in_column = function (token, column) {
+
+};
+
 /**
  * A ply is one turn taken by one of the players.
  * Return a new board after a player places a token in a specified column.
@@ -117,7 +125,20 @@ Connect4.player_to_ply = function (board) {
  *   return the new board, otherwise return `undefined`.
  */
 Connect4.ply = function (token, column_index, board) {
-
+    if (Connect4.is_game_ended(board)) {
+        return undefined;
+    }
+    if (column_is_full(column_index, board)) {
+        return undefined;
+    }
+    if (Connect4.player_to_ply(board) !== token) {
+        return undefined;
+    }
+    const column  = board[column_index];
+    const updated_column = place_token_in_column(token, column);
+    const new_board = [...board];
+    new_board[column_index] = updated_column;
+    return new_board;
 };
 
 /**
