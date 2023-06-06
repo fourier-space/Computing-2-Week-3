@@ -31,17 +31,21 @@ document.documentElement.style.setProperty("--game-columns", game_columns);
 
 const game_board = document.getElementById("game_board");
 
-
-
 const create_cell_in_row = function (row_index, tr) {
     return function (column_index) {
         const td = document.createElement("td");
 
         td.tabIndex = 0;
 
-        td.onclick = function () {
+        td.onclick = function (event) {
             game_state = LightsOut.ply(column_index, row_index, game_state);
             update_display();
+
+            // If we mouse click the button, rather than keyboard,
+            // De-focus, to not show green outline.
+            if (event) {
+                td.blur();
+            }
         };
 
         td.onkeydown = function (event) {

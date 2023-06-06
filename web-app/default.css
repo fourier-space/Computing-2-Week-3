@@ -107,7 +107,7 @@ main
     --button-lower-edge: var(--button-lower-edge-pressed);
 }
 
-#game_board td:focus
+#game_board td:focus:not(:active)
 {
     --lit-inner-background: var(--focus-inner-background);
     --lit-outer-background: var(--focus-outer-background);
