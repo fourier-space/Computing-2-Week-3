@@ -1,25 +1,24 @@
 import R from "./ramda.js";
-import LightsOut from "./LightsOut.js";
+import Connect4 from "./Connect4.js";
 
 const game_rows = 6;
 const game_columns = 7;
 
-let game_state = LightsOut.starting_state();
+let board = Connect4.empty_board();
 
 const update_display = function () {
 
-    document.getElementById("moves").textContent = game_state.moves;
-    document.getElementById("level").textContent = game_state.level;
-    document.getElementById("par").textContent = game_state.par;
-
-    game_state.board.forEach(function (row, row_index) {
+    R.reverse(R.transpose(board)).forEach(function (row, row_index) {
         row.forEach(function (cell, column_index) {
             const table_cell = table_cells[row_index][column_index];
-            table_cell.className = (
-                cell
-                ? "lit"
-                : "unlit"
-            );
+
+            if (cell === 0) {
+                table_cell.className = "unlit";
+            } else if (cell === 1) {
+                table_cell.className = "lit player1";
+            } else {
+                table_cell.className = "lit player2";
+            }
         });
     });
 };
@@ -38,7 +37,11 @@ const create_cell_in_row = function (row_index, tr) {
         td.tabIndex = 0;
 
         td.onclick = function (event) {
-            game_state = LightsOut.ply(column_index, row_index, game_state);
+            board = Connect4.ply(
+                Connect4.player_to_ply(board),
+                column_index,
+                board
+            );
             update_display();
 
             // If we mouse click the button, rather than keyboard,
