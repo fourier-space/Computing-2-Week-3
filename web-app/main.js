@@ -1,8 +1,8 @@
 import R from "./ramda.js";
 import LightsOut from "./LightsOut.js";
 
-const game_rows = 6;
-const game_columns = 7;
+const game_rows = 5;
+const game_columns = 5;
 
 let game_state = LightsOut.starting_state();
 
