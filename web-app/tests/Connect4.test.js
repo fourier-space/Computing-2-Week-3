@@ -41,6 +41,7 @@ describe("Plies", function () {
             const final_column = final_board[column_index];
 
             if (!R.equals(initial_column, final_column)) {
+                debugger;
                 throw new Error(
                     `When making a ply in column ${in_column},
                     column ${column_index} changes.
