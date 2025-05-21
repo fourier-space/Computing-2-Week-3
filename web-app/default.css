@@ -1,152 +1,67 @@
 :root
 {
-    --game-columns: 5;
-    --game-rows: 5;
-
-    --aside-max-width: 300px;
-    --aside-min-width: 100px;
-    --aside-width: clamp(var(--aside-min-width), 30vw, var(--aside-max-width));
-    --header-height: 80px;
-
-    --button-border-width: 15px;
-    --button-border-radius: 12px;
-    --button-blur-width: 1px;
-    --button-lower-edge: 10px;
-    --button-press-depth: 5px;
-    --button-lower-edge-pressed: 5px; /* button-lower-edge - button-press-depth*/
-
-    --aside-background: #99a;
-    --main-background: #bbc;
-    --focus-inner-background: rgb(176, 255, 17);
-    --focus-outer-background: rgb(170, 132, 102);
-    --focus-drop-shadow: rgb(144, 170, 51);
-    --lit-inner-background: #f17;
-    --lit-outer-background: #a67;
-    --lit-background: #d47;
-    --lit-drop-shadow: #a35;
-    --lit-drop-glow: #f173;
-    --unlit-inner-background: #768;
-    --unlit-outer-background: #667;
-    --unlit-drop-shadow: #546;
-    
-    --header-color: var(--lit-inner-background);
-    --header-background: #000;
+    --header-bar-height: 72px;
+    --header-bar-font-size: 24pt;
+    --sidebar-width: 250px;
 }
 
 body
 {
-    font-family: Helvetica, Arial, sans-serif;
-    margin: 0;
-    overflow: clip;
+    background-color: #f08;
+}
+
+main
+{
+    background-color: #f80;
+    position: absolute;
+    left: var(--sidebar-width);
+    top: var(--header-bar-height);
+    width: calc(100% - var(--sidebar-width));
+    height: calc(100% - var(--header-bar-height))
 }
 
 aside
 {
-    background: var(--aside-background);
-    height: calc(100% - var(--header-height));
-    padding-left: 1em;
-    padding-right: 1em;
+    background-color: #0f8;
     position: absolute;
-    top: var(--header-height);
-    width: var(--aside-width);
+    left: 0;
+    top: var(--header-bar-height);
+    height: calc(100% - var(--header-bar-height));
+    width: var(--sidebar-width);
 }
-/* Header */
 
 header
 {
-    background: var(--header-background);
-    color: var(--header-color);
-    height: var(--header-height);
+    background-color: #80f;
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: var(--header-bar-height);
 }
 
-h1 {
-    font-family: Impact;
-    text-align: center;
-}
-
-/* Main */
-
-main
+h1
 {
-    background: var(--main-background);
-    position: absolute;
-    top: var(--header-height);
-    left: var(--aside-width);
-    width: calc(100% - var(--aside-width));
-    height: calc(100% - var(--header-height));
+    font-size: var(--header-bar-font-size);
 }
 
-.game_board_container
+.grid-container
 {
-    aspect-ratio: var(--game-columns) / var(--game-rows);
-    max-width: 100%;
+    background-color: #08f;
+    aspect-ratio: 1;
     max-height: 100%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#game_board
+table
 {
+    border-collapse: collapse;
     width: 100%;
     height: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
 }
 
-#game_board td
+td
 {
-    border: var(--button-border-width) solid var(--main-background);
-    border-radius: var(--button-border-radius);
-}
-
-#game_board td:active
-{
-    position: relative;
-    top: var(--button-press-depth);
-    --button-lower-edge: var(--button-lower-edge-pressed);
-}
-
-.player2
-{
-    --lit-inner-background: var(--focus-inner-background);
-    --lit-outer-background: var(--focus-outer-background);
-    --lit-drop-shadow: var(--focus-drop-shadow);
-    --unlit-outer-background: var(--focus-drop-shadow);
-    --unlit-drop-shadow: var(--focus-drop-shadow);
-    outline: none;
-}
-
-.lit
-{
-    /* background: var(--lit-background); */
-    background: radial-gradient(
-        var(--lit-inner-background),
-        var(--lit-outer-background)
-    );
-    filter: drop-shadow(
-        0
-        var(--button-lower-edge)
-        var(--button-lower-edge)
-        var(--lit-drop-glow)
-    ) drop-shadow(
-        0px
-        var(--button-lower-edge)
-        var(--button-blur-width)
-        var(--lit-drop-shadow)
-    );
-}
-
-.unlit
-{
-    background: radial-gradient(
-        var(--unlit-inner-background),
-        var(--unlit-outer-background)
-    );
-    filter: drop-shadow(
-        0px
-        var(--button-lower-edge)
-        var(--button-blur-width)
-        var(--unlit-drop-shadow)
-    );
+    border: 1px solid black;
 }
