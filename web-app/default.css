@@ -65,3 +65,13 @@ td
 {
     border: 1px solid black;
 }
+
+.on
+{
+    background-color: yellow;
+}
+
+.off
+{
+    background-color: midnightblue;
+}
