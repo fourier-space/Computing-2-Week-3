@@ -7,11 +7,11 @@ const col_count = 5;
 const grid = document.getElementById("grid");
 
 let board = [
-    [false, false, false, false, false],
-    [false, true, false, false, false],
-    [true, true, true, false, false],
-    [false, true, false, false, false],
-    [false, false, false, false, false]
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true]
 ];
 
 const grid_tds = R.range(0, row_count).map(function (row_index) {

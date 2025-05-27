@@ -42,8 +42,9 @@ const Connect4 = Object.create(null);
 Connect4.empty_grid = function () {
 };
 
+Connect4.empty_space = 0;
 Connect4.yellow_disc = 1;
-Connect4.red_disc = 1;
+Connect4.red_disc = 2;
 
 /**
  * Drop will let a player drop a disc in to a slot in a Connect 4 Grid.
@@ -63,16 +64,53 @@ Connect4.drop = function (slot, disc, grid) {
 Connect4.player_to_ply = function (grid) {
 };
 
+// const is_column_full = R.none((space) => space === Connect4.empty_space);
+const is_column_full = R.none(R.equals(Connect4.empty_space));
+
+
+const is_grid_full = R.all(is_column_full);
+
 /**
  * @returns {boolean}
  */
-Connect4.is_game_ended = function (grid){
+Connect4.is_game_ended = function (grid) {
+    return Connect4.is_game_won(grid) || is_grid_full(grid);
 };
 
 /**
  * @returns {boolean}
  */
-Connect4.is_game_won = function (grid){
+Connect4.is_game_won = function (grid) {
+    return (
+        Connect4.is_game_won_for_player(1, grid) ||
+        Connect4.is_game_won_for_player(2, grid)
+    );
+};
+
+const is_column_won_vertically_for_player = function () {
+
+}
+
+// const is_game_won_vertically_for_player = function (player) {
+//     return R.any(is_column_won_vertically_for_player(player));
+// };
+
+const is_game_won_vertically_for_player = R.compose(
+    R.any,
+    is_column_won_vertically_for_player
+);
+
+const is_game_won_horizontally_for_player = function (player, grid) {
+    return is_game_won_vertically_for_player(player, R.transpose(grid));
+};
+
+const is_game_won_positive_diagonally_for_player = function (player, grid) {};
+
+const is_game_won_negative_diagonally_for_player = function (player, grid) {
+    return is_game_won_positive_diagonally_for_player(
+        player,
+        R.reverse(grid)
+    );
 };
 
 /**
@@ -80,6 +118,12 @@ Connect4.is_game_won = function (grid){
  */
 Connect4.is_game_won_for_player = function (player) {
     return function (grid) {
+        return (
+            is_game_won_vertically_for_player(player)(grid) ||
+            is_game_won_horizontally_for_player(player)(grid) ||
+            is_game_won_positive_diagonally_for_player(player)(grid) ||
+            is_game_won_negative_diagonally_for_player(player)(grid)
+        );
     };
 };
 
