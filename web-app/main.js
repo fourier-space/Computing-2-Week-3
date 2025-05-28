@@ -21,8 +21,6 @@ const grid_tds = R.range(0, row_count).map(function (row_index) {
     return R.range(0, col_count).map(function (col_index) {
         const td = document.createElement("td");
         tr.append(td);
-        td.textContent = `${row_index},${col_index}`;
-        // td.className = "off";
 
         td.onclick = function () {
             board = LightsOut.press(row_index, col_index , board);

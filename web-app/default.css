@@ -3,36 +3,47 @@
     --header-bar-height: 72px;
     --header-bar-font-size: 24pt;
     --sidebar-width: 250px;
+    --main-background: #999;
+    --aside-background: #888;
+    --header-background: yellow;
+    --grid-spacing: 15px;
+    --grid-colour: #aaa;
 }
 
 body
 {
-    background-color: #f08;
+  font-family: "Imperial Sans Text";
 }
 
 main
 {
-    background-color: #f80;
-    position: absolute;
+    background-color: var(--main-background);
+    height: calc(100% - var(--header-bar-height));
     left: var(--sidebar-width);
+    position: absolute;
     top: var(--header-bar-height);
     width: calc(100% - var(--sidebar-width));
-    height: calc(100% - var(--header-bar-height))
 }
 
 aside
 {
-    background-color: #0f8;
+    background-color: var(--aside-background);
     position: absolute;
     left: 0;
     top: var(--header-bar-height);
     height: calc(100% - var(--header-bar-height));
     width: var(--sidebar-width);
+    font-size: 18pt;
+    padding-left: 0.5em;
+}
+
+dt {
+  font-weight: bold;
 }
 
 header
 {
-    background-color: #80f;
+    background-color: var(--header-background);
     position: absolute;
     top: 0;
     left: 0;
@@ -43,11 +54,12 @@ header
 h1
 {
     font-size: var(--header-bar-font-size);
+    font-family: impact;
+    text-align: center;
 }
 
 .grid-container
 {
-    background-color: #08f;
     aspect-ratio: 1;
     max-height: 100%;
     margin-left: auto;
@@ -63,15 +75,16 @@ table
 
 td
 {
-    border: 1px solid black;
+    border: var(--grid-spacing) solid var(--grid-colour);
+    width: calc(100% / 5);
 }
 
 .on
 {
-    background-color: yellow;
+    background-color: #f08;
 }
 
 .off
 {
-    background-color: midnightblue;
+    background-color: #56a;
 }
