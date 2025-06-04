@@ -9,7 +9,7 @@ import R from "./ramda.js";
 const Connect4 = Object.create(null);
 
 /**
- * A Connect 4 grid is a 7×6 grid containing Connect 4 tokens.
+ * A Connect 4 grid is a 7×6 grid containing Connect 4 discs.
  * @memberof Connect4
  * @typedef {Connect4.Column[]} Grid
  */
@@ -87,30 +87,56 @@ Connect4.is_game_won = function (grid) {
     );
 };
 
-const is_column_won_vertically_for_player = function () {
-
-}
+/**
+ * Curried function that first takes a player and then takes a column.
+ * @sig player -> column -> boolean
+ * @private
+ */
+const is_column_won_vertically_for_player = function (player) {
+    return R.pipe(
+        R.groupWith(R.equals),
+        R.filter((group) => group.length >= 4),
+        R.any((group) => group[0] === player)
+    );
+};
 
 // const is_game_won_vertically_for_player = function (player) {
 //     return R.any(is_column_won_vertically_for_player(player));
 // };
 
+/**
+ * Curried function that first takes a player and then takes a grid.
+ * @sig player -> grid -> boolean
+ * @private
+ */
 const is_game_won_vertically_for_player = R.compose(
     R.any,
     is_column_won_vertically_for_player
 );
 
-const is_game_won_horizontally_for_player = function (player, grid) {
-    return is_game_won_vertically_for_player(player, R.transpose(grid));
+const is_game_won_horizontally_for_player = function (player) {
+    return function (grid) {
+        return is_game_won_vertically_for_player(player)(R.transpose(grid));
+    };
 };
 
-const is_game_won_positive_diagonally_for_player = function (player, grid) {};
+const pad_grid = R.zipWith(
+    R.concat,
+    R.range(0, 7).map((x) => 6 - x).map(R.repeat(0))
+);
 
-const is_game_won_negative_diagonally_for_player = function (player, grid) {
-    return is_game_won_positive_diagonally_for_player(
-        player,
-        R.reverse(grid)
-    );
+const is_game_won_positive_diagonally_for_player = function (player) {
+    return function (grid) {
+        return is_game_won_horizontally_for_player(player)(pad_grid(grid));
+    };
+};
+
+const is_game_won_negative_diagonally_for_player = function (player) {
+    return function (grid) {
+        return is_game_won_positive_diagonally_for_player(
+            player
+        )(R.reverse(grid));
+    };
 };
 
 /**
@@ -127,5 +153,6 @@ Connect4.is_game_won_for_player = function (player) {
     };
 };
 
+debugger;
 
 export default Object.freeze(Connect4);
