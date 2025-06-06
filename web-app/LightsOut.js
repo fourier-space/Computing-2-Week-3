@@ -1,5 +1,13 @@
 const LightsOut = {};
 
+LightsOut.empty_grid = () => [
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, true]
+];
+
 const cell_to_flip = function (row_offset, col_offset) {
     return (
         row_offset === 0 &&
@@ -29,5 +37,7 @@ LightsOut.press = function (clicked_row_index, clicked_col_index, board) {
         });
     });
 };
+
+// debugger;
 
 export default Object.freeze(LightsOut);

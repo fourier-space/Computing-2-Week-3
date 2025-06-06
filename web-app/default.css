@@ -88,3 +88,18 @@ td
 {
     background-color: #56a;
 }
+
+td:focus
+{
+  outline: none;
+}
+
+td.on:focus
+{
+  background-color: yellow;
+}
+
+td.off:focus
+{
+  background-color: #880;
+}

@@ -29,6 +29,18 @@ const Connect4 = Object.create(null);
  * @typedef {1 | 2} Disc
  */
 
+Connect4.empty_space = 0;
+Connect4.yellow_disc = 1;
+Connect4.red_disc = 2;
+
+Connect4.slot_A = 0;
+Connect4.slot_B = 1;
+Connect4.slot_C = 2;
+Connect4.slot_D = 3;
+Connect4.slot_E = 4;
+Connect4.slot_F = 5;
+Connect4.slot_G = 6;
+
 /**
  * Create a new empty grid.
  * Optionally with a specified width and height,
@@ -40,11 +52,8 @@ const Connect4 = Object.create(null);
  * @returns {Connect4.Grid} An empty grid for starting a game.
  */
 Connect4.empty_grid = function () {
+    return R.repeat(R.repeat(Connect4.empty_space, 6), 7);
 };
-
-Connect4.empty_space = 0;
-Connect4.yellow_disc = 1;
-Connect4.red_disc = 2;
 
 /**
  * Drop will let a player drop a disc in to a slot in a Connect 4 Grid.
@@ -56,6 +65,13 @@ Connect4.red_disc = 2;
  * dropped into it.
  */
 Connect4.drop = function (slot, disc, grid) {
+    if (Connect4.player_to_ply(grid) !== disc) {
+        return undefined;
+    }
+    if (is_column_full(grid[slot])) {
+        return undefined;
+    }
+    return grid;
 };
 
 /**
