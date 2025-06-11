@@ -1,0 +1,112 @@
+:root
+{
+    --col-count: 7;
+    --row-count: 6;
+    --header-bar-height: 72px;
+    --header-bar-font-size: 24pt;
+    --sidebar-width: 250px;
+    --main-background: #999;
+    --aside-background: #888;
+    --header-background: yellow;
+    --grid-spacing: 15px;
+    --grid-colour: #aaa;
+}
+
+body
+{
+  font-family: "Imperial Sans Text";
+}
+
+main
+{
+    background-color: var(--main-background);
+    height: calc(100% - var(--header-bar-height));
+    left: var(--sidebar-width);
+    position: absolute;
+    top: var(--header-bar-height);
+    width: calc(100% - var(--sidebar-width));
+}
+
+aside
+{
+    background-color: var(--aside-background);
+    position: absolute;
+    left: 0;
+    top: var(--header-bar-height);
+    height: calc(100% - var(--header-bar-height));
+    width: var(--sidebar-width);
+    font-size: 18pt;
+    padding-left: 0.5em;
+}
+
+dt {
+  font-weight: bold;
+}
+
+header
+{
+    background-color: var(--header-background);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-bar-height);
+}
+
+h1
+{
+    font-size: var(--header-bar-font-size);
+    font-family: impact;
+    text-align: center;
+}
+
+.grid-container
+{
+    aspect-ratio: var(--col-count) / var(--row-count);
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+
+td
+{
+    border: var(--grid-spacing) solid var(--grid-colour);
+    width: calc(100% / var(--col-count));
+}
+
+.p1
+{
+    background-color: yellow;
+}
+
+.p2
+{
+    background-color: #f08;
+}
+
+.empty
+{
+    background-color: #56a;
+}
+
+td:focus
+{
+  outline: none;
+}
+
+td.on:focus
+{
+  background-color: yellow;
+}
+
+td.off:focus
+{
+  background-color: #880;
+}

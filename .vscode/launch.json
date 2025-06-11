@@ -5,12 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run Web App – Firefox",
+            "name": "Run Lights Out – Firefox",
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
             "reloadOnAttach": true,
             "file": "${workspaceFolder}/web-app/index.html",
+            "preferences": {
+                "security.fileuri.strict_origin_policy": false
+            },
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**",
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "name": "Run Connect 4 – Firefox",
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "reloadOnAttach": true,
+            "file": "${workspaceFolder}/web-app-c4/index.html",
             "preferences": {
                 "security.fileuri.strict_origin_policy": false
             },

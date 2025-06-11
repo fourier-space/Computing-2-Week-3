@@ -42,4 +42,7 @@ describe("When a disc is dropped into a slot with free spaces in a grid that is 
         );
     });
 
+    it("The shape of the grid remains the same", function () {
+        throw new Error("Test not implemented");
+    });
 });

@@ -55,6 +55,16 @@ Connect4.empty_grid = function () {
     return R.repeat(R.repeat(Connect4.empty_space, 6), 7);
 };
 
+const drop_into_column = function (disc, column) {
+    const bottom_discs = R.filter(
+        (disc) => disc !== Connect4.empty_space,
+        column
+    );
+    const empty_spaces_count = column.length - bottom_discs.length - 1;
+    const top_empty_spaces = R.repeat(Connect4.empty_space, empty_spaces_count);
+    return [...bottom_discs, disc, ...top_empty_spaces];
+};
+
 /**
  * Drop will let a player drop a disc in to a slot in a Connect 4 Grid.
  * @memberof Connect4
@@ -65,19 +75,31 @@ Connect4.empty_grid = function () {
  * dropped into it.
  */
 Connect4.drop = function (slot, disc, grid) {
-    if (Connect4.player_to_ply(grid) !== disc) {
-        return undefined;
-    }
-    if (is_column_full(grid[slot])) {
-        return undefined;
-    }
-    return grid;
+    const drop_column = grid[slot];
+    const new_column = drop_into_column(disc, drop_column);
+
+    // const new_grid = R.clone(grid);
+    // new_grid[slot] = new_column;
+
+    return grid.with(slot, new_column);
 };
 
 /**
  * @returns {Connect4.Player}
  */
-Connect4.player_to_ply = function (grid) {
+Connect4.player_to_drop = function (grid) {
+    const discs_in_grid = R.pipe(
+        R.flatten,
+        R.reject(R.equals(Connect4.empty_space)),
+        R.length
+    )(grid);
+
+    if (discs_in_grid % 2 === 0) {
+        return Connect4.yellow_disc;
+    }
+    if (discs_in_grid % 2 === 1) {
+        return Connect4.red_disc;
+    }
 };
 
 // const is_column_full = R.none((space) => space === Connect4.empty_space);
@@ -167,6 +189,10 @@ Connect4.is_game_won_for_player = function (player) {
             is_game_won_negative_diagonally_for_player(player)(grid)
         );
     };
+};
+
+Connect4.space_at = function (row_index, col_index, grid) {
+    return R.reverse(R.transpose(grid))[row_index][col_index];
 };
 
 debugger;
