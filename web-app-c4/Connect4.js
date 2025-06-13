@@ -1,3 +1,4 @@
+;
 import R from "./ramda.js";
 /**
  * Connect4.js is a module to model and play "Connect Four" and related games.
@@ -195,6 +196,26 @@ Connect4.space_at = function (row_index, col_index, grid) {
     return R.reverse(R.transpose(grid))[row_index][col_index];
 };
 
-debugger;
+
+const factorial = function (n) {
+    if (n === 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+};
+
+const hanoi_solve = function (initial_index, final_index, stack_size) {
+    if (stack_size === 1) {
+        return [
+            [initial_index, final_index]
+        ];
+    }
+    const other_index = 0 + 1 + 2 - initial_index - final_index;
+    return [
+        ...hanoi_solve(initial_index, other_index, stack_size - 1),
+        ...hanoi_solve(initial_index, final_index, 1),
+        ...hanoi_solve(other_index, final_index, stack_size - 1)
+    ];
+};
 
 export default Object.freeze(Connect4);

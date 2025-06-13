@@ -42,6 +42,10 @@ const grid_tds = R.range(0, row_count).map(function (row_index) {
                 Connect4.player_to_drop(state),
                 state
             );
+            const dialog = document.getElementById("dialog");
+
+            dialog.style.visibility = "visible";
+
             update_grid();
         };
 
@@ -102,4 +106,35 @@ const update_grid = function () {
     });
 };
 
+document.getElementById("close-dialog").onclick = function () {
+    const dialog = document.getElementById("dialog");
+
+    dialog.style.visibility = "hidden";
+
+    state = Connect4.empty_grid();
+
+    update_grid();
+};
+
 update_grid();
+
+
+// document.body.textContent = "";
+
+// R.range(0, 11).forEach(function (i) {
+//     const b = document.createElement("button");
+//     b.textContent = i;
+//     document.body.append(b);
+//     b.onclick = function () {
+//         alert(i);
+//     };
+// });
+
+// for (let i = 0; i <= 10; i += 1) {
+//     const b = document.createElement("button");
+//     b.textContent = i;
+//     document.body.append(b);
+//     b.onclick = function () {
+//         alert(i);
+//     }
+// }

@@ -110,3 +110,15 @@ td.off:focus
 {
   background-color: #880;
 }
+
+#dialog
+{
+position: absolute;
+width: 50%;
+height: 50%;
+background: aliceblue;
+left: 25%;
+top: 25%;
+font-size: 30pt;
+visibility: hidden;
+}

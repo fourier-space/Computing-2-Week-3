@@ -58,7 +58,7 @@
                 "<node_internals>/**"
             ],
             // You'll need to change this line below to point to your module.
-            "program": "${workspaceFolder}/web-app/Connect4.js"
+            "program": "${workspaceFolder}/web-app-c4/Connect4.js"
         },
         {
             "name": "Generate Docs",
