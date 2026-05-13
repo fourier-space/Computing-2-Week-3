@@ -1,0 +1,52 @@
+:root
+{
+    --aside-width: 230px;
+    --header-font-size: 32pt;
+    --header-height: 64px;
+    --header-padding: 0.25em;
+}
+
+body
+{
+    background-color: #f80;
+    font-family: "Imperial Sans Display";
+}
+
+header
+{
+    background-color: #80f;
+    font-size: var(--header-font-size);
+    font-weight: bold;
+    height: var(--header-height);
+    left: 0px;
+    padding-top: var(--header-padding);
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 100%;
+}
+
+aside
+{
+    background-color: #0f8;
+    height: calc(100% -  var(--header-height));
+    left: 0px;
+    position: absolute;
+    top: var(--header-height);
+    width: var(--aside-width);
+}
+
+main
+{
+    background-color: #f08;
+    height: calc(100% -  var(--header-height));
+    left: var(--aside-width);
+    position: absolute;
+    top: var(--header-height);
+    width: calc(100% - var(--aside-width));
+}
+
+td
+{
+    background-color: #08f;
+}
