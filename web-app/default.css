@@ -1,9 +1,16 @@
 :root
 {
     --aside-width: 230px;
+    --column-count: 1; /* Set in main.js */
     --header-font-size: 32pt;
     --header-height: 64px;
     --header-padding: 0.25em;
+    --row-count: 1; /* Set in main.js */
+}
+
+*
+{
+    box-sizing: border-box;
 }
 
 body
@@ -46,7 +53,19 @@ main
     width: calc(100% - var(--aside-width));
 }
 
+table
+{
+    aspect-ratio: var(--column-count) / var(--row-count);
+    border-collapse: collapse;
+    width: 100%;
+}
+
 td
 {
     background-color: #08f;
+    border: 1px solid white;
+    color: white;
+    height: calc(100% / var(--row-count));
+    text-align: center;
+    width: calc(100% / var(--column-count));
 }
