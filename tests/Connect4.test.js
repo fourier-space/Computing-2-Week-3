@@ -8,11 +8,6 @@ describe("On your turn, drop one of your discs into any slot in the top of the g
 
     it("The columns that were not dropped into remain unchanged", function () {
         // GIVEN a grid that is not ended,
-
-
-
-
-
         const initial_state = [
             [0, 0, 0, 0, 0, 0],
             [1, 0, 0, 0, 0, 0],
