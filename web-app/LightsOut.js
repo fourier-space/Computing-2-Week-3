@@ -37,7 +37,7 @@ LightsOut.flip = function (flip_row_index, flip_column_index, state) {
 
             return cell;
         });
-    })
+    });
 };
 
 export default Object.freeze(LightsOut);
