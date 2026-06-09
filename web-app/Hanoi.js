@@ -1,6 +1,6 @@
 const Hanoi = {};
 
-Hanoi.starting_position = function () {
+Hanoi.starting_stacks = function () {
     return [
         [0, 1, 2, 3, 4],
         [],
@@ -8,60 +8,55 @@ Hanoi.starting_position = function () {
     ];
 };
 
-Hanoi.move_ring = function (from_peg_index, to_peg_index, position) {
+Hanoi.move_ring = function (source_peg, destination_peg, stacks) {
 
-    const from_peg = position[from_peg_index];
-    if (from_peg.length === 0) {
+    const source_stack = stacks[source_peg];
+    if (source_stack.length === 0) {
         return undefined;
     }
 
-    const to_peg = position[to_peg_index];
-    const [ring, ...remaining_peg] = from_peg;
-    if (to_peg.length !== 0 && ring > to_peg[0]) {
+    const destination_stack = stacks[destination_peg];
+    const [ring, ...remaining_stack] = source_stack;
+    if (destination_stack.length !== 0 && ring > destination_stack[0]) {
         return undefined;
     }
 
-    const other_peg_index = 0 + 1 + 2 - from_peg_index - to_peg_index;
-    const other_peg = position[other_peg_index];
-
-    const next_position = [];
-
-    next_position[from_peg_index] = remaining_peg;
-    next_position[to_peg_index] = [ring, ...to_peg];
-    next_position[other_peg_index] = other_peg;
-
-    console.log(JSON.stringify(next_position));
-    return next_position;
+    return stacks.with(
+        source_peg,
+        remaining_stack
+    ).with(
+        destination_peg,
+        [ring, ...destination_stack]
+    );
 };
 
-Hanoi.move_stack = function (size, from_peg_index, to_peg_index, position) {
-    if (size === 1) {
-        return Hanoi.move_ring(from_peg_index, to_peg_index, position);
+Hanoi.move_stack = function (stack_size, source_peg, destination_peg, stacks) {
+    if (stack_size === 1) {
+        return Hanoi.move_ring(source_peg, destination_peg, stacks);
     }
 
-    const other_peg_index = 0 + 1 + 2 - from_peg_index - to_peg_index;
+    const other_peg = 0 + 1 + 2 - source_peg - destination_peg;
     const first_intermediate = Hanoi.move_stack(
-        size - 1,
-        from_peg_index,
-        other_peg_index,
-        position
+        stack_size - 1,
+        source_peg,
+        other_peg,
+        stacks
     );
     const second_intermediate = Hanoi.move_ring(
-        from_peg_index,
-        to_peg_index,
+        source_peg,
+        destination_peg,
         first_intermediate
     );
-    const result = Hanoi.move_stack(
-        size - 1,
-        other_peg_index,
-        to_peg_index,
+    return Hanoi.move_stack(
+        stack_size - 1,
+        other_peg,
+        destination_peg,
         second_intermediate
     );
-    return result;
 };
 
-Hanoi.solve = function (position) {
-    return Hanoi.move_stack(5, 0, 2, position);
+Hanoi.solve = function (stacks) {
+    return Hanoi.move_stack(5, 0, 2, stacks);
 };
 
 export default Object.freeze(Hanoi);
