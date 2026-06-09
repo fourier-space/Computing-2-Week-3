@@ -16,18 +16,18 @@ const Connect4 = {};
  * @typedef Grid
  */
 
-const column_count = 7;
-const row_count = 6;
+Connect4.column_count = 7;
+Connect4.row_count = 6;
 
 const empty_space = 0;
 const disc_player_1 = 1;
 const disc_player_2 = 2;
 
 
-const empty_column = R.repeat(empty_space, row_count);
+const empty_column = R.repeat(empty_space, Connect4.row_count);
 
 Connect4.empty_grid = function () {
-    return R.repeat(empty_column, column_count);
+    return R.repeat(empty_column, Connect4.column_count);
 };
 
 const drop_into_column = function (disc, column) {
@@ -35,7 +35,7 @@ const drop_into_column = function (disc, column) {
     const bottom_of_column = column.filter(not_equals(empty_space));
     const column_with_dropped_disc = R.append(disc, bottom_of_column);
     const filled_spaces = column_with_dropped_disc.length;
-    const empty_spaces = row_count - filled_spaces;
+    const empty_spaces = Connect4.row_count - filled_spaces;
     return R.concat(
         column_with_dropped_disc,
         R.repeat(empty_space, empty_spaces)
@@ -112,6 +112,10 @@ Connect4.to_string = function (grid) {
         R.map(R.join("")),
         R.join("\n")
     )(grid);
+};
+
+Connect4.to_array_grid = function (grid) {
+    return R.reverse(R.transpose(grid));
 };
 
 export default Object.freeze(Connect4);
